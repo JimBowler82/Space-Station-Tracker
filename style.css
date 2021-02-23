@@ -1,0 +1,55 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: url("https://source.unsplash.com/user/nasa");
+  filter: blur(4px);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -999;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  width: 40%;
+  min-width: 650px;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  margin-top: 40px;
+  box-shadow: 0px 0px 12px 4px rgba(255, 255, 255, 0.4);
+}
+
+main p {
+  padding: 30px;
+  font-weight: bold;
+}
+
+#mapContainer {
+  width: 640px;
+  height: 480px;
+}
+
+#dateTime {
+  font-style: italic;
+}
