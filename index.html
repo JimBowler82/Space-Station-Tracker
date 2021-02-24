@@ -4,10 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="upgrade-insecure-requests"
-    />
     <title>Space Station</title>
     <link
       rel="stylesheet"
@@ -21,8 +17,44 @@
     <main>
       <h1>Space Station Position Tracker</h1>
       <p>ISS Position on <span id="dateTime"></span></p>
+
+      <div id="statsContainer">
+        <div id="listDiv1">
+          <ul id="list-1">
+            <li><strong>Name:</strong><span id="list-1-name"></span></li>
+            <li>
+              <strong>NORAD ID:</strong><span id="list-1-norad-id"></span>
+            </li>
+            <li>
+              <strong>Current Latitude:</strong
+              ><span id="list-1-latitude"></span>
+            </li>
+            <li>
+              <strong>Current Longitude:</strong
+              ><span id="list-1-longitude"></span>
+            </li>
+          </ul>
+        </div>
+        <div id="listDiv2">
+          <ul id="list-2">
+            <li>
+              <strong>Altitude:</strong><span id="list-2-altitude"></span>
+            </li>
+            <li>
+              <strong>Velocity:</strong><span id="list-2-velocity"></span>
+            </li>
+            <li>
+              <strong>Visibility:</strong><span id="list-2-visibility"></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
       <div id="mapContainer"></div>
-      <div id="passes"></div>
+      <div id="passes">
+        <h2><i>Coming Soon ...</i></h2>
+        <p>Upcoming passes for your area!</p>
+      </div>
     </main>
 
     <script
