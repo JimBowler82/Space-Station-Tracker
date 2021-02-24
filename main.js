@@ -1,13 +1,14 @@
 const mapContainer = document.getElementById("mapContainer");
 const dateTimeSpan = document.getElementById("dateTime");
 const passesDiv = document.getElementById("passes");
+const listItems = document.querySelectorAll("li > span");
 
 // API Key & Data URL
 const platform = new H.service.Platform({
   apikey: "IhtkIaClMw1piLoY1dYC6btfraCYRbphRZQLo9zSf68",
 });
 
-const dataUrl = "http://api.open-notify.org/iss-now.json";
+const dataUrl = "https://api.wheretheiss.at/v1/satellites/25544";
 const passUrl = `http://api.open-notify.org/iss-pass.json`;
 ///////
 
@@ -37,11 +38,30 @@ function updateMap() {
 async function initialLoad() {
   const result = await fetch(dataUrl);
   const data = await result.json();
+
   dateTimeSpan.innerText = new Date(data.timestamp * 1000).toUTCString();
-  issCoords.lat = data.iss_position.latitude;
-  issCoords.lng = data.iss_position.longitude;
+  issCoords.lat = data.latitude;
+  issCoords.lng = data.longitude;
   setUserCoords();
   createMap();
+  populateStats(data);
+}
+
+function populateStats(data) {
+  listItems.forEach((item) => {
+    if (item.id === "list-1-name") item.innerText = data.name.toUpperCase();
+    if (item.id === "list-1-norad-id") item.innerText = data.id;
+    if (item.id === "list-1-latitude")
+      item.innerText = data.latitude.toFixed(6);
+    if (item.id === "list-1-longitude")
+      item.innerText = data.longitude.toFixed(6);
+    if (item.id === "list-2-altitude")
+      item.innerText = `${Math.round(data.altitude)} km`;
+    if (item.id === "list-2-velocity")
+      item.innerText = `${Math.round(data.velocity)} km/h`;
+    if (item.id === "list-2-visibility")
+      item.innerText = data.visibility.toUpperCase();
+  });
 }
 
 function setUserCoords() {
@@ -92,9 +112,12 @@ setInterval(async () => {
   const result = await fetch(dataUrl);
   const data = await result.json();
 
+  // Update stats
+  populateStats(data);
+
   // Update stored co-ordinates
-  issCoords.lat = data.iss_position.latitude;
-  issCoords.lng = data.iss_position.longitude;
+  issCoords.lat = data.latitude;
+  issCoords.lng = data.longitude;
 
   // Update the dateTime string
   dateTimeSpan.innerText = new Date(data.timestamp * 1000).toUTCString();
