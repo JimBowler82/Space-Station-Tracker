@@ -5,7 +5,7 @@ A HTML5 CSS3 & JavaScript project to access position data from the International
 #### Libraries used:
 
 - [Here Maps](https://developer.here.com/)
-- [Open Notify Space API's](http://open-notify.org/)
+- ['Where The ISS At' API](https://wheretheiss.at/w/developer)
 - [Unsplash Source](https://source.unsplash.com/) - For space themed images.
 
 [View LIVE here](https://spacestation-tracker.netlify.app/)
