@@ -12,8 +12,6 @@
   left: 0;
   background-image: url("https://source.unsplash.com/user/nasa");
   filter: blur(4px);
-  background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
   z-index: -999;
 }
@@ -24,6 +22,7 @@ body {
   display: flex;
   justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
+  position: relative;
 }
 
 main {
@@ -41,8 +40,14 @@ main {
 }
 
 main p {
-  padding: 30px;
+  padding: 30px 30px 15px 30px;
   font-weight: bold;
+}
+
+#countdown {
+  display: inline-block;
+  width: 20px;
+  padding-left: 5px;
 }
 
 #mapContainer {
@@ -59,6 +64,7 @@ main p {
   display: flex;
   width: 80%;
   padding: 10px;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 

@@ -2,6 +2,7 @@ const mapContainer = document.getElementById("mapContainer");
 const dateTimeSpan = document.getElementById("dateTime");
 const passesDiv = document.getElementById("passes");
 const listItems = document.querySelectorAll("li > span");
+const countdown = document.getElementById("countdown");
 
 // API Key & Data URL
 const platform = new H.service.Platform({
@@ -45,8 +46,10 @@ async function initialLoad() {
   setUserCoords();
   createMap();
   populateStats(data);
+  countDownAndUpdate();
 }
 
+// Populate the stats section with latest data.
 function populateStats(data) {
   listItems.forEach((item) => {
     if (item.id === "list-1-name") item.innerText = data.name.toUpperCase();
@@ -64,6 +67,8 @@ function populateStats(data) {
   });
 }
 
+// Get users own geo coordinates to place a marker on the map
+// of where the user is located.
 function setUserCoords() {
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -84,6 +89,7 @@ function setUserCoords() {
   }
 }
 
+// Function to create the map.
 function createMap() {
   // Map Layers
   defaultLayers = platform.createDefaultLayers();
@@ -106,8 +112,26 @@ function createMap() {
   map.setCenter(coords);
 }
 
-// Get fresh data every 5 seconds & update
-setInterval(async () => {
+// Get fresh data every 15 seconds & update
+// Variable to hold desired number of seconds
+let count = 15;
+
+function countDownAndUpdate() {
+  let intervalId = setInterval(async () => {
+    countdown.innerText = count;
+    count--;
+
+    if (count < 0) {
+      clearInterval(intervalId);
+      count = 10;
+      fetchAndHandleUpdate();
+    }
+  }, 1000);
+}
+
+// Fetch data and call functions to update map and stats
+// Finally, calls countDownAndUpdate() to restart the countdown.
+async function fetchAndHandleUpdate() {
   // Get data
   const result = await fetch(dataUrl);
   const data = await result.json();
@@ -127,6 +151,10 @@ setInterval(async () => {
 
   // Update the map with new data
   updateMap();
-}, 5000);
 
+  // Restart the countdownAndUpdate function;
+  countDownAndUpdate();
+}
+
+// On initial page load to fetch data, populate map & stats.
 initialLoad();
